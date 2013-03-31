@@ -1,0 +1,10 @@
+<ul>
+    {% for item in content %}
+        <li>
+        <a href="{{item.get_absolute_url}}">{{ item.slug }}</a>
+        <div class="smalltext">
+            <div class="node-info">{{item.pub_date}}</div>
+        </div>
+        </li>
+    {% endfor %}
+</ul>
