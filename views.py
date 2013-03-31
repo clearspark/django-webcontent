@@ -1,6 +1,6 @@
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
-from WebContent.models import Content, Page, FileUpload
+from csdjango.WebContent.models import Content, Page, FileUpload
 from django.template import Context, loader, RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.conf import settings
