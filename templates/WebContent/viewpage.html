@@ -1,7 +1,14 @@
 {% extends "WebContent/app_site_glue.html" %}
 
-{% block GeneralMain %}
-    {% block WebContentMain %}
-        {{page.html|safe}}
-    {% endblock %}
+{% block pageMenu %}
+    <!-- Pagemenu block in WebContent/viewpage.html -->
+    {% if page.owner = user %}
+        <ul>
+            <li><a href="{% url editpage page.slug %}">Edit</a></li>
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block WebContentMain %}
+    {{page.html|safe}}
 {% endblock %}

@@ -1,12 +1,13 @@
-<html>
-    <head>
-        <title>Webcontent - default page</title>
-    </head>
+{% extends 'base.html' %}
 
-    <body>
-        {% block GeneralMain %}
-            {% block WebContentMain %}
-            {% endblock %}
-        {% endblock %}
-    </body>
-</html>
+{% block appHead %}
+{% endblock %}
+
+{% block mainContent %}
+    {% block WebContentMain %}
+    {% endblock %}
+{% endblock %}
+
+{% block pageMenu %}
+{% endblock %}
+

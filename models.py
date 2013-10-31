@@ -17,6 +17,7 @@ class Content(models.Model):
     pub_date = models.DateField('Date published')
     tags = models.ManyToManyField(ContentTag)
     authGroup = models.ManyToManyField("auth.Group", help_text = "Groups who are allowed to view content")
+    owner = models.ForeignKey('auth.User')
 
     def __unicode__(self):
         return self.slug

@@ -2,7 +2,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from csdjango.WebContent.models import Content, Page, FileUpload
 from django.template import Context, loader, RequestContext
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, render, redirect
 from django.conf import settings
 
 def authenticate(request, obj):
@@ -23,7 +23,19 @@ def viewpage(request, slug, template=None):
 
     if template is None:
         template = "WebContent/viewpage.html"
-    return render_to_response(template, context_instance = RequestContext(request, {"page":page}) )
+    return render(request, template,{"page":page})
+
+def editpage(request, slug, template=None):
+    page = get_object_or_404(Page, slug = slug)
+    if request.user != page.owner:
+        raise PermissionDenied
+    if request.method == "POST":
+        page.html = request.POST['content']
+        page.save()
+        return redirect(page)
+    if template is None:
+        template = 'WebContent/edit_page.html'
+    return render(request, template, {'page': page, 'template': template})
 
 def viewfile(request, slug):
 

@@ -1,0 +1,20 @@
+{% extends 'WebContent/app_site_glue.html' %}
+
+{% block appHead %}
+    {{block.super}}
+    <script type="text/javascript" src="{{STATIC_URL}}WebContent/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}WebContent/ckeditor/adapters/jquery.js"></script>
+{% endblock %}
+
+{% block WebContentMain %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <textarea name='content'>
+            {{page.html|safe}}
+        </textarea>
+        <input type='submit' value='save'/>
+    </form>
+    <script type="text/javascript">
+        $('textarea').ckeditor();
+    </script>
+{% endblock %}
