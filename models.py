@@ -4,6 +4,10 @@ from django.core.urlresolvers import reverse
 
 #Each page stored in a database so that users can add more pages easily
 
+def href(url, text, newtab=False):
+    tab = ' target="_blank"' if newtab else ''
+    return '<a href="%s"%s>%s</a>' %(url, newtab, text)
+
 class ContentTag(models.Model):
     name = models.CharField(max_length = 20)
 
@@ -17,17 +21,31 @@ class Content(models.Model):
     authGroup = models.ManyToManyField("auth.Group", help_text = "Groups who are allowed to view content")
     owner = models.ForeignKey('auth.User')
 
+    def get_subclass(self):
+        if hasattr(self, "page"):
+            return self.page
+        elif hasattr(self, "fileupload"):
+            return self.fileupload
+        elif hasattr(self, "hyperlink"):
+            return self.hyperlink
+        else:
+            return None
+
     def __unicode__(self):
+        sub = self.get_subclass()
+        if hasattr(sub, '__unicode__'):
+            return sub.__unicode__()
         return self.slug
         
     def get_absolute_url(self):
-        if hasattr(self, "page"):
-            return self.page.get_absolute_url()
-        elif hasattr(self, "fileupload"):
-            return self.fileupload.get_absolute_url()
+        sub = self.get_subclass()
+        if sub:
+            return sub.get_absolute_url()
         else:
             return ""
 
+    def href(self):
+        return href(self.get_absolute_url(), self.__unicode__())
 
 class Page(Content):
 
@@ -48,3 +66,13 @@ class FileUpload(Content):
 
     def get_absolute_url(self):
         return reverse("filedownloadpage", args=[self.slug])
+
+    def get_static_url(self):
+        return self.fileContent.url
+
+
+class HyperLink(Content):
+    target = models.URLField()
+
+    def get_absolute_url(self):
+        return self.target
