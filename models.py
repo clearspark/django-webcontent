@@ -1,7 +1,5 @@
 #WebContent app
-from django import forms
 from django.db import models
-from django.conf import settings
 from django.core.urlresolvers import reverse
 
 #Each page stored in a database so that users can add more pages easily
