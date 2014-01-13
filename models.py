@@ -32,9 +32,6 @@ class Content(models.Model):
             return None
 
     def __unicode__(self):
-        sub = self.get_subclass()
-        if hasattr(sub, '__unicode__'):
-            return sub.__unicode__()
         return self.slug
         
     def get_absolute_url(self):
