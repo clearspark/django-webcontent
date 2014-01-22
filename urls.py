@@ -1,7 +1,7 @@
 #app WebContent
 from django.conf.urls import patterns, include, url
 
-urlpatterns = patterns('csdjango.WebContent.views',
+urlpatterns = patterns('WebContent.views',
 
     url(r'^viewpage/(.*)', 'viewpage', name='viewpage'),#returns div with filecontent
     url(r'^editpage/(.*)', 'editpage', name='editpage'),#returns div with filecontent

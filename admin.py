@@ -1,6 +1,6 @@
 #Content app
 from django.contrib import admin
-from csdjango.WebContent.models import Page, FileUpload, ContentTag, HyperLink
+from WebContent.models import Page, FileUpload, ContentTag, HyperLink
 
 class FileUploadAdmin(admin.ModelAdmin):
     list_display = ["slug", "get_static_url"]
