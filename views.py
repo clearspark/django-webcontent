@@ -27,8 +27,9 @@ def viewpage(request, slug, template=None):
 
 def editpage(request, slug, template=None):
     page = get_object_or_404(Page, slug = slug)
-    if request.user != page.owner:
-        raise PermissionDenied
+    auth = authenticate(request, page)
+    if auth != "all good":
+        return auth
     if request.method == "POST":
         page.html = request.POST['content']
         page.save()

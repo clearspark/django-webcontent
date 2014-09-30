@@ -1,10 +1,21 @@
-<ul>
-    {% for item in content %}
-        <li>
-        <a href="{{item.get_absolute_url}}">{{ item.slug }}</a>
-        <div class="smalltext">
-            <div class="node-info">{{item.pub_date}}</div>
-        </div>
-        </li>
-    {% endfor %}
-</ul>
+{% extends "WebContent/app_site_glue.html" %}
+
+{% block pageMenu %}
+    <!-- Pagemenu block in WebContent/viewpage.html -->
+        <ul>
+            <li><a href="{% url editpage page.slug %}">Edit</a></li>
+        </ul>
+{% endblock %}
+
+{% block WebContentMain %}
+    <ul>
+        {% for item in content %}
+            <li>
+            <a href="{{item.get_absolute_url}}">{{ item.slug }}</a>
+            <div class="smalltext">
+                <div class="node-info">{{item.pub_date}}</div>
+            </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
