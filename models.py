@@ -20,6 +20,8 @@ class Content(models.Model):
     tags = models.ManyToManyField(ContentTag)
     authGroup = models.ManyToManyField("auth.Group", help_text = "Groups who are allowed to view content")
     owner = models.ForeignKey('auth.User')
+    created = models.DateField(auto_now_add=True)
+    edited = models.DateField(auto_now=True)
 
     def get_subclass(self):
         if hasattr(self, "page"):
