@@ -1,15 +1,22 @@
 <!DOCTYPE html>
+{% extends "WebContent/app_site_glue.html" %}
+
 <html>
     <head>
+        {% block appHead %}
+            {{ block.super }}
         <title>Download - {{download.slug}}</title>
         <script type="text/javascript">
-            setTimeout(function(){window.location="{% url filedl download.slug %}";}, 300);
+            setTimeout(function(){window.location="{% url 'filedl' download.slug %}";}, 300);
         </script>
+        {% endblock %}
 
     </head>
     <body>
+{% block WebContentMain %}
         <p>
-        If your download does not start automatically, please click <a href="{% url filedl download.slug %}">here</a>
+        If your download does not start automatically, please click <a href="{% url 'filedl' download.slug %}">here</a>
         </p>
+{% endblock %}
     </body>
 </html>

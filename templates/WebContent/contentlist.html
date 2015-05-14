@@ -3,7 +3,7 @@
 {% block pageMenu %}
     <!-- Pagemenu block in WebContent/viewpage.html -->
         <ul>
-            <li><a href="{% url editpage page.slug %}">Edit</a></li>
+            <li><a href="{% url 'editpage' page.slug %}">Edit</a></li>
         </ul>
 {% endblock %}
 
