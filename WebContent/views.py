@@ -4,6 +4,7 @@ from WebContent.models import Content, Page, FileUpload
 from django.template import Context, loader, RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, render, redirect
 from django.conf import settings
+from django.core.exceptions import PermissionDenied
 
 def authenticate(request, obj):
     if obj.authGroup.filter(name = "everyone").exists():
@@ -27,9 +28,8 @@ def viewpage(request, slug, template=None):
 
 def editpage(request, slug, template=None):
     page = get_object_or_404(Page, slug = slug)
-    auth = authenticate(request, page)
-    if auth != "all good":
-        return auth
+    if page.owner != request.user:
+        raise PermissionDenied()
     if request.method == "POST":
         page.html = request.POST['content']
         page.save()
