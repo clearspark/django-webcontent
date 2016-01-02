@@ -1,0 +1,8 @@
+include LICENSING
+include README.rst
+recursive-include licenses *
+recursive-include DataView *.py
+recursive-include DataView/fixtures *
+recursive-include DataView/static *
+recursive-include DataView/reports *
+recursive-include DataView/templates *

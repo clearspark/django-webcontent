@@ -1,0 +1,33 @@
+This software is copyright (c) 2011-2015 ClearSpark, PTY LTD.
+All rights reserved.
+
+In terms of this document, "this software" is taken to mean any and all files
+within the directory, and any subdirectories thereof, in which this document
+resides, excluding the contents of files or directories that are symbolic links.
+
+You may not reproduce or distribute this software in binary or source form
+except for backup, archival, and/or operational redundancy purposes, nor may
+you modify this software in any format, electronic or mechanical, without
+explicit prior written permission from the copyright holder(s). In the case of
+reproduction for the aforementioned permissible purposes, this notice must be
+reproduced verbatim as well.
+
+This software is provided by the copyright holders "as is" and any express or
+implied warranties, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose are disclaimed. In no event
+shall the copyright holder(s) be liable for any direct, indirect, incidental,
+special, exemplary, or consequential damages (including, but not limited to,
+procurement of substitute goods or services; loss of use, data, or profits; or
+business interruption) however caused and on any theory of liability, whether in
+contract, strict liability, or tort (including negligence or otherwise) arising
+in any way out of the use of this software, even if advised of the possibility
+of such damage.
+
+This software uses and interacts with other software applications and libraries,
+collectively known as 'dependencies'. These dependencies are not distributed
+with this software, and must be installed by you. One specific dependency,
+pygal, is released under the GNU Lesser General Public License version 3
+(LGPLv3) and the use of it by this software requires that notice of the
+licensing terms of pygal be given. You can find the complete terms of the LGPLv3
+license that covers only the dependency pygal in the license/LGPLv3 file,
+accompanying this software.
