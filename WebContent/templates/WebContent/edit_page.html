@@ -1,9 +1,11 @@
 {% extends 'WebContent/app_site_glue.html' %}
 
+{% load static %}
+
 {% block appHead %}
     {{block.super}}
-    <script type="text/javascript" src="{{STATIC_URL}}WebContent/ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}WebContent/ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript" src="{% static 'WebContent/ckeditor/ckeditor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'WebContent/ckeditor/adapters/jquery.js' %}"></script>
 {% endblock %}
 
 {% block WebContentMain %}

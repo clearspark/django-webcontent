@@ -1,3 +1,5 @@
 *.pyc
 *~
 *.swp
+dist*
+django_webcontent.egg-info*
