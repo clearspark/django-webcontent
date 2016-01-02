@@ -2,9 +2,11 @@
 
 {% block pageMenu %}
     <!-- Pagemenu block in WebContent/viewpage.html -->
+    {% if user == page.owner %}
         <ul>
             <li><a href="{% url 'editpage' page.slug %}">Edit</a></li>
         </ul>
+    {% endif %}
 {% endblock %}
 
 {% block WebContentMain %}
