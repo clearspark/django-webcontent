@@ -58,7 +58,7 @@ class Page(Content):
     #Optional fields that should only be filled in when entering an update. Text and image.
 
 class FileUpload(Content):
-    fileContent = models.FileField(upload_to= "uploads/webcontent/%Y/%m/%d/", null=True,blank=True)
+    fileContent = models.FileField(upload_to= "uploads/webcontent/%Y/%m/%d/", null=False,blank=False)
 
     def image_tag(self):
         return '<img src="%s"/>' %(self.fileContent.url)
