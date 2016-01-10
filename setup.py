@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='django-webcontent',
-    version='0.2',
+    version='0.3',
     author = "Matthys Kroon",
     author_email = "matthysk@clearspark.co.za",
     description='Web content management app for django.',
