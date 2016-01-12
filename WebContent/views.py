@@ -7,20 +7,14 @@ from django.conf import settings
 from django.core.exceptions import PermissionDenied
 
 def authenticate(request, obj):
-    if obj.authGroup.filter(name = "everyone").exists():
-        return "all good"
-    elif request.user.groups.filter(pk__in = obj.authGroup.all()).exists():
-        return "all good"
-    else:
-        return HttpResponseRedirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    if not obj.authGroup.filter(name = "everyone").exists() and not request.user.groups.filter(pk__in = obj.authGroup.all()).exists():
+        raise PermissionDenied
 
 def viewpage(request, slug, template=None):
 
     page = get_object_or_404(Page, slug = slug)
 
-    auth = authenticate(request, page)
-    if auth != "all good":
-        return auth
+    authenticate(request, page)
 
     if template is None:
         template = "WebContent/viewpage.html"
@@ -41,10 +35,7 @@ def editpage(request, slug, template=None):
 def viewfile(request, slug):
 
     fileupload = get_object_or_404(FileUpload, slug = slug)
-    auth = authenticate(request, fileupload)
-    if auth != "all good":
-        return auth
-
+    authenticate(request, fileupload)
     fileupload.fileContent.open()
     content = fileupload.fileContent.read()
     fileupload.fileContent.close()
@@ -52,7 +43,7 @@ def viewfile(request, slug):
 
 def downloadPage(request, slug, template=False):
     fileupload = get_object_or_404(FileUpload, slug = slug)
-    auth = authenticate(request, fileupload)
+    authenticate(request, fileupload)
     if auth != "all good":
         return auth
     if template:
@@ -63,8 +54,6 @@ def downloadPage(request, slug, template=False):
 def filedl(request, slug):
     fileupload = get_object_or_404(FileUpload, slug = slug)
     auth = authenticate(request, fileupload)
-    if auth != "all good":
-        return auth
     fileupload.fileContent.open()
     response    = HttpResponse(fileupload.fileContent.read())
     fileupload.fileContent.close()
@@ -84,7 +73,5 @@ def taglist(request, tag, template=None):
 
 def contentlist(request):
     auth = authenticate(request, page)
-    if auth != "all good":
-        return auth
     return ""
     
