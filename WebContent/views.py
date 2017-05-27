@@ -58,14 +58,14 @@ def filedl(request, slug):
     response    = HttpResponse(fileupload.fileContent.read())
     fileupload.fileContent.close()
     filename = fileupload.fileContent.url.split("/")[-1]
-    print "filename:", filename
+    print("filename:", filename)
     response['Content-Disposition'] = 'attachment; filename = %s' %(filename,)
     return response
 
 def taglist(request, tag, template=None):
-    print "tag", tag
+    print("tag", tag)
     content = Content.objects.filter(tags__name=tag).all()
-    print "content:", content
+    print("content:", content)
     if template is None:
         template = "WebContent/contentlist.html"
     return render_to_response(template, context_instance=RequestContext(request, {"content": content}))
