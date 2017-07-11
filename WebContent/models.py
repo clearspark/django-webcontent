@@ -11,7 +11,7 @@ def href(url, text, newtab=False):
 class ContentTag(models.Model):
     name = models.CharField(max_length = 20)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
     
 class Content(models.Model):
@@ -33,7 +33,7 @@ class Content(models.Model):
         else:
             return None
 
-    def __unicode__(self):
+    def __str__(self):
         return self.slug
         
     def get_absolute_url(self):
@@ -44,7 +44,7 @@ class Content(models.Model):
             return ""
 
     def href(self):
-        return href(self.get_absolute_url(), self.__unicode__())
+        return href(self.get_absolute_url(), str(self))
 
 class Page(Content):
 
