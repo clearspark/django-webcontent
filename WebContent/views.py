@@ -2,7 +2,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from WebContent.models import Content, Page, FileUpload
 from django.template import Context, loader, RequestContext
-from django.shortcuts import render_to_response, get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
 
@@ -47,9 +47,9 @@ def downloadPage(request, slug, template=False):
     if auth != "all good":
         return auth
     if template:
-        return render_to_response(template, context_instance = RequestContext(request, {"download":fileupload}))
+        return render(request, template, {"download":fileupload})
     else:
-        return render_to_response("WebContent/downloadpage.html", context_instance = RequestContext(request, {"download":fileupload}))
+        return render(request, "WebContent/downloadpage.html", {"download":fileupload})
     
 def filedl(request, slug):
     fileupload = get_object_or_404(FileUpload, slug = slug)
@@ -68,7 +68,7 @@ def taglist(request, tag, template=None):
     print("content:", content)
     if template is None:
         template = "WebContent/contentlist.html"
-    return render_to_response(template, context_instance=RequestContext(request, {"content": content}))
+    return render(request, template, {"content": content})
 
 
 def contentlist(request):
