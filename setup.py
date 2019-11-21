@@ -7,7 +7,7 @@ setup(
     author = "Matthys Kroon",
     author_email = "matthysk@clearspark.co.za",
     description='Web content management app for django.',
-    license = "Proprietary, copyright ClearSpark (c) 2012-2015",
+    license = "GNU AFFERO GENERAL PUBLIC LICENSE",
     packages=['WebContent'],
     include_package_data=True,
     install_requires=[
