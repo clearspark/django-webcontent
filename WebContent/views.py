@@ -44,8 +44,6 @@ def viewfile(request, slug):
 def downloadPage(request, slug, template=False):
     fileupload = get_object_or_404(FileUpload, slug = slug)
     authenticate(request, fileupload)
-    if auth != "all good":
-        return auth
     if template:
         return render(request, template, {"download":fileupload})
     else:
