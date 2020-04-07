@@ -16,8 +16,8 @@ class ContentTag(models.Model):
     
 class Content(models.Model):
     slug = models.SlugField(max_length=200)
-    pub_date = models.DateField('Date published')
-    tags = models.ManyToManyField(ContentTag)
+    pub_date = models.DateField('Date published', null=True, blank=True)
+    tags = models.ManyToManyField(ContentTag, null=True, blank=True)
     authGroup = models.ManyToManyField("auth.Group", help_text = "Groups who are allowed to view content")
     owner = models.ForeignKey('auth.User')
     created = models.DateField(auto_now_add=True)
