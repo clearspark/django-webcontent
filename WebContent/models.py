@@ -10,9 +10,13 @@ def href(url, text, newtab=False):
 
 class ContentTag(models.Model):
     name = models.CharField(max_length = 20)
+    context = models.CharField(max_length = 20, null=True, blank=True)
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('taglist', kwargs={"tag": self.name})
     
 class Content(models.Model):
     slug = models.SlugField(max_length=200)
