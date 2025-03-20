@@ -4,6 +4,7 @@
 
 {% block appHead %}
     {{block.super}}
+    <script type="text/javascript" src="{% static 'WebContent/jquery-1.7.2.js' %}"></script>
     <script type="text/javascript" src="{% static 'WebContent/ckeditor/ckeditor.js' %}"></script>
     <script type="text/javascript" src="{% static 'WebContent/ckeditor/adapters/jquery.js' %}"></script>
 {% endblock %}
@@ -17,6 +18,8 @@
         <input type='submit' value='save'/>
     </form>
     <script type="text/javascript">
-        $('textarea').ckeditor();
+        CKEDITOR.domReady(function() {
+            $('textarea').ckeditor();
+        });
     </script>
 {% endblock %}
