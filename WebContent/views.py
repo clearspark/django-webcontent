@@ -6,15 +6,15 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
 
-def authenticate(request, obj):
-    if not obj.authGroup.filter(name = "everyone").exists() and not request.user.groups.filter(pk__in = obj.authGroup.all()).exists():
+def authorize(request, obj):
+    if not obj.is_public and not request.user.groups.filter(pk__in=obj.authGroup.all()).exists():
         raise PermissionDenied
 
 def viewpage(request, slug, template=None):
 
     page = get_object_or_404(Page, slug = slug)
 
-    authenticate(request, page)
+    authorize(request, page)
 
     if template is None:
         template = "WebContent/viewpage.html"
@@ -35,7 +35,7 @@ def editpage(request, slug, template=None):
 def viewfile(request, slug):
 
     fileupload = get_object_or_404(FileUpload, slug = slug)
-    authenticate(request, fileupload)
+    authorize(request, fileupload)
     fileupload.fileContent.open()
     content = fileupload.fileContent.read()
     fileupload.fileContent.close()
@@ -43,7 +43,7 @@ def viewfile(request, slug):
 
 def downloadPage(request, slug, template=False):
     fileupload = get_object_or_404(FileUpload, slug = slug)
-    authenticate(request, fileupload)
+    authorize(request, fileupload)
     if template:
         return render(request, template, {"download":fileupload})
     else:
@@ -51,7 +51,7 @@ def downloadPage(request, slug, template=False):
     
 def filedl(request, slug):
     fileupload = get_object_or_404(FileUpload, slug = slug)
-    auth = authenticate(request, fileupload)
+    auth = authorize(request, fileupload)
     fileupload.fileContent.open()
     response    = HttpResponse(fileupload.fileContent.read())
     fileupload.fileContent.close()

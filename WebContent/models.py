@@ -26,6 +26,7 @@ class Content(models.Model):
     owner = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     created = models.DateField(auto_now_add=True)
     edited = models.DateField(auto_now=True)
+    is_public = models.BooleanField(default=False, help_text="Allow anonymous users to view this content")
 
     def get_subclass(self):
         if hasattr(self, "page"):
