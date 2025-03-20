@@ -1,0 +1,58 @@
+{% extends "base/base.html" %}
+
+{% block pageMenu %}
+    <!-- Pagemenu block in demo/home.html -->
+{% endblock %}
+
+{% block WebContentMain %}
+<div class="container mt-4">
+    <h1>Django WebContent Example</h1>
+    
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <h2>Pages</h2>
+            <ul class="list-group">
+                {% for page in pages %}
+                <li class="list-group-item">
+                    <a href="{% url 'viewpage' page.slug %}">{{ page.slug }}</a>
+                    {% if page.owner == user %}
+                    <a href="{% url 'editpage' page.slug %}" class="btn btn-sm btn-primary float-end">Edit</a>
+                    {% endif %}
+                </li>
+                {% empty %}
+                <li class="list-group-item">No pages available</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="col-md-4">
+            <h2>Files</h2>
+            <ul class="list-group">
+                {% for file in files %}
+                <li class="list-group-item">
+                    <a href="{% url 'filedownloadpage' file.slug %}">{{ file.slug }}</a>
+                    {% if file.owner == user %}
+                    <a href="{% url 'filedl' file.slug %}" class="btn btn-sm btn-primary float-end">Download</a>
+                    {% endif %}
+                </li>
+                {% empty %}
+                <li class="list-group-item">No files available</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="col-md-4">
+            <h2>Tags</h2>
+            <ul class="list-group">
+                {% for tag in tags %}
+                <li class="list-group-item">
+                    <a href="{% url 'taglist' tag.name %}">{{ tag.name }}</a>
+                </li>
+                {% empty %}
+                <li class="list-group-item">No tags available</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %} 
