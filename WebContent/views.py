@@ -70,6 +70,8 @@ def taglist(request, tag, template=None):
 
 
 def contentlist(request):
-    auth = authenticate(request, page)
-    return ""
+    content = Content.objects.all()
+    if template is None:
+        template = "WebContent/contentlist.html"
+    return render(request, template, {"content": content})
     

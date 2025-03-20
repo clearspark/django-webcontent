@@ -1,6 +1,6 @@
 #WebContent app
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 #Each page stored in a database so that users can add more pages easily
 
@@ -23,7 +23,7 @@ class Content(models.Model):
     pub_date = models.DateField('Date published', null=True, blank=True)
     tags = models.ManyToManyField(ContentTag, blank=True)
     authGroup = models.ManyToManyField("auth.Group", help_text = "Groups who are allowed to view content")
-    owner = models.ForeignKey('auth.User')
+    owner = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     created = models.DateField(auto_now_add=True)
     edited = models.DateField(auto_now=True)
 

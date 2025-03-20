@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FileUpload',
             fields=[
-                ('content_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='WebContent.Content')),
+                ('content_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='WebContent.Content', on_delete=models.CASCADE)),
                 ('fileContent', models.FileField(null=True, upload_to=b'uploads/webcontent/%Y/%m/%d/', blank=True)),
             ],
             bases=('WebContent.content',),
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='HyperLink',
             fields=[
-                ('content_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='WebContent.Content')),
+                ('content_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='WebContent.Content', on_delete=models.CASCADE)),
                 ('target', models.URLField()),
             ],
             bases=('WebContent.content',),
@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Page',
             fields=[
-                ('content_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='WebContent.Content')),
+                ('content_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='WebContent.Content', on_delete=models.CASCADE)),
                 ('html', models.TextField()),
             ],
             bases=('WebContent.content',),
@@ -60,7 +60,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='content',
             name='owner',
-            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='content',
