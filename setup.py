@@ -9,7 +9,7 @@ setup(
     name='django-webcontent',
     version='0.5.0',
     author="Matthys Kroon",
-    author_email="matthysk@clearspark.co.za",
+    author_email="matthysk@gmail.com",
     description='Web content management app for django.',
     long_description=long_description,
     long_description_content_type='text/x-rst',
